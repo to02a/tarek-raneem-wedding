@@ -14,8 +14,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Cormorant+Garamond:wght@400;500;600&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#f8f2e8;
-  --paper2:#fffaf2;
+  --paper:#f7f1e8;
+  --paper2:#fffaf4;
   --ink:#222821;
   --muted:#60685f;
   --gold:#a77c2f;
@@ -80,7 +80,7 @@ a{color:inherit;text-decoration:none}
   width:180px;height:180px;border-radius:50%;
   margin:auto;display:grid;place-items:center;
   border:1px solid rgba(167,124,47,.7);
-  background:rgba(255,250,242,.56);
+  background:rgba(255,250,244,.62);
   box-shadow:0 24px 70px rgba(94,75,45,.08);
   backdrop-filter:blur(3px);
   position:relative
@@ -149,12 +149,39 @@ a{color:inherit;text-decoration:none}
 .footer{position:relative;z-index:3;text-align:center;padding:22px 30px 52px;font-size:18px;color:#4e554e}
 .footer span{color:var(--gold)}
 
-.floral-corner{position:absolute;z-index:2;pointer-events:none;width:300px;height:520px;opacity:.98}
-.floral-corner.tl{top:0;left:0}
-.floral-corner.tr{top:0;right:0;transform:scaleX(-1)}
-.floral-corner.bl{bottom:0;left:0;transform:scaleY(-1)}
-.floral-corner.br{bottom:0;right:0;transform:scale(-1)}
-.floral-spray{position:absolute;z-index:2;pointer-events:none;right:-18px;top:40%;width:120px;opacity:.76}
+.floral-corner{
+  position:absolute;
+  z-index:2;
+  pointer-events:none;
+  width:330px;
+  height:520px;
+  background-image:url("https://images.unsplash.com/photo-1773212666406-09186f268cdc?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=82&w=1600");
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  opacity:.96;
+  filter:saturate(.88) brightness(1.06) drop-shadow(0 14px 30px rgba(91,72,47,.10));
+  -webkit-mask-image:radial-gradient(ellipse 92% 86% at 22% 14%,#000 0 58%,rgba(0,0,0,.78) 68%,transparent 88%);
+  mask-image:radial-gradient(ellipse 92% 86% at 22% 14%,#000 0 58%,rgba(0,0,0,.78) 68%,transparent 88%);
+}
+.floral-corner.tl{top:-8px;left:-8px}
+.floral-corner.tr{
+  top:84px;right:-90px;
+  width:190px;height:330px;
+  opacity:.34;
+  transform:scaleX(-1);
+}
+.floral-corner.bl{
+  bottom:92px;left:-92px;
+  width:190px;height:330px;
+  opacity:.30;
+  transform:scaleY(-1);
+}
+.floral-corner.br{
+  bottom:-8px;right:-8px;
+  width:345px;height:540px;
+  transform:scale(-1);
+}
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .85s ease,transform .85s ease}
 .reveal.show{opacity:1;transform:none}
 
@@ -180,9 +207,9 @@ a{color:inherit;text-decoration:none}
   .countdown{padding:20px 0}.num{font-size:38px}.lab{font-size:12px}
   .map iframe{height:295px}
   .actions{flex-direction:column}.btn{width:100%}
-  .floral-corner{width:180px;height:340px;opacity:.95}
-  .floral-corner.tr,.floral-corner.bl{opacity:.42}
-  .floral-spray{width:88px;opacity:.5}
+  .floral-corner{width:205px;height:330px;opacity:.94}
+  .floral-corner.tr,.floral-corner.bl{width:105px;height:185px;opacity:.24}
+  .floral-corner.br{width:220px;height:350px;opacity:.94}
 }
 @media(max-width:390px){
   .section{padding-inline:23px}
@@ -196,103 +223,12 @@ a{color:inherit;text-decoration:none}
 </style>
 </head>
 <body>
-<svg width="0" height="0" aria-hidden="true" style="position:absolute">
-  <defs>
-    <radialGradient id="roseLav" cx="42%" cy="35%" r="70%">
-      <stop offset="0" stop-color="#f2e8f6"/><stop offset=".42" stop-color="#d7c0e3"/><stop offset="1" stop-color="#bca0ca"/>
-    </radialGradient>
-    <radialGradient id="roseIvory" cx="42%" cy="35%" r="70%">
-      <stop offset="0" stop-color="#fffefa"/><stop offset=".55" stop-color="#f7eee1"/><stop offset="1" stop-color="#e7d7c1"/>
-    </radialGradient>
-    <linearGradient id="leafG" x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0" stop-color="#9ba795"/><stop offset="1" stop-color="#596d57"/>
-    </linearGradient>
-    <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
-      <feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#74624e" flood-opacity=".13"/>
-    </filter>
-    <symbol id="floralCluster" viewBox="0 0 300 520">
-      <g filter="url(#softShadow)">
-        <g stroke="#6f8069" stroke-width="2" fill="none" opacity=".75">
-          <path d="M18 25C78 92 90 158 122 248S166 388 237 475"/>
-          <path d="M28 9C80 85 150 92 232 125"/>
-          <path d="M55 130C103 176 175 190 244 210"/>
-          <path d="M28 285C87 310 138 340 188 411"/>
-        </g>
-        <g fill="url(#leafG)">
-          <ellipse cx="66" cy="92" rx="14" ry="31" transform="rotate(-38 66 92)"/>
-          <ellipse cx="105" cy="135" rx="13" ry="28" transform="rotate(42 105 135)"/>
-          <ellipse cx="78" cy="218" rx="13" ry="28" transform="rotate(-46 78 218)"/>
-          <ellipse cx="133" cy="245" rx="14" ry="31" transform="rotate(50 133 245)"/>
-          <ellipse cx="95" cy="337" rx="13" ry="28" transform="rotate(-42 95 337)"/>
-          <ellipse cx="158" cy="383" rx="12" ry="27" transform="rotate(47 158 383)"/>
-          <ellipse cx="191" cy="447" rx="12" ry="26" transform="rotate(-38 191 447)"/>
-          <ellipse cx="180" cy="116" rx="12" ry="27" transform="rotate(-55 180 116)"/>
-          <ellipse cx="221" cy="145" rx="11" ry="24" transform="rotate(51 221 145)"/>
-        </g>
-
-        <g>
-          <circle cx="42" cy="55" r="46" fill="#fffefa"/>
-          <circle cx="18" cy="36" r="25" fill="#fff"/>
-          <circle cx="68" cy="28" r="27" fill="#fff"/>
-          <circle cx="74" cy="69" r="29" fill="#fff"/>
-          <circle cx="34" cy="89" r="27" fill="#fff"/>
-          <circle cx="6" cy="75" r="23" fill="#fff"/>
-          <circle cx="43" cy="57" r="8" fill="#efe5d6"/>
-
-          <circle cx="103" cy="72" r="38" fill="url(#roseLav)"/>
-          <path d="M79 76c20-28 54-17 48 8-6 23-37 28-49 9 12 8 35 4 35-12 0-13-17-17-28-7" fill="none" stroke="#f5edf7" stroke-width="5" stroke-linecap="round"/>
-          <path d="M90 57c22-13 43 4 31 22-10 16-32 12-35-4 9 8 23 6 26-3 3-9-7-16-17-13" fill="none" stroke="#b99ac7" stroke-width="3" stroke-linecap="round"/>
-
-          <circle cx="57" cy="154" r="40" fill="url(#roseIvory)"/>
-          <path d="M35 160c18-28 50-22 51 1 1 22-27 34-45 21 13 2 31-6 31-19 0-13-16-19-29-10" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
-          <path d="M41 143c20-14 40-2 34 15-6 16-27 17-34 4 9 5 21 2 23-7 2-8-7-14-17-11" fill="none" stroke="#ddc8ab" stroke-width="3" stroke-linecap="round"/>
-
-          <circle cx="28" cy="237" r="35" fill="url(#roseLav)"/>
-          <path d="M5 242c20-25 47-17 46 5-1 19-24 29-40 17 11 2 27-5 28-16 1-12-13-18-26-10" fill="none" stroke="#f3e8f5" stroke-width="5" stroke-linecap="round"/>
-
-          <g fill="#fff">
-            <circle cx="110" cy="185" r="12"/><circle cx="133" cy="197" r="10"/><circle cx="152" cy="218" r="11"/>
-            <circle cx="118" cy="228" r="9"/><circle cx="148" cy="249" r="10"/><circle cx="173" cy="266" r="8"/>
-            <circle cx="70" cy="303" r="11"/><circle cx="91" cy="315" r="8"/><circle cx="113" cy="329" r="10"/>
-            <circle cx="124" cy="352" r="9"/><circle cx="148" cy="367" r="11"/><circle cx="172" cy="392" r="8"/>
-            <circle cx="186" cy="422" r="10"/><circle cx="205" cy="445" r="8"/><circle cx="226" cy="464" r="9"/>
-          </g>
-          <g fill="#e2cde9">
-            <circle cx="139" cy="163" r="10"/><circle cx="164" cy="182" r="8"/><circle cx="87" cy="279" r="9"/><circle cx="140" cy="314" r="8"/>
-          </g>
-          <g fill="#d5c7ad" opacity=".9">
-            <circle cx="110" cy="185" r="2.5"/><circle cx="133" cy="197" r="2.5"/><circle cx="152" cy="218" r="2.5"/>
-            <circle cx="118" cy="228" r="2.5"/><circle cx="70" cy="303" r="2.5"/><circle cx="91" cy="315" r="2.5"/>
-          </g>
-        </g>
-      </g>
-    </symbol>
-
-    <symbol id="spray" viewBox="0 0 130 420">
-      <path d="M30 20C35 95 70 152 79 218s6 120 22 182" fill="none" stroke="#72816d" stroke-width="2" opacity=".7"/>
-      <g fill="url(#leafG)">
-        <ellipse cx="43" cy="83" rx="10" ry="23" transform="rotate(-42 43 83)"/>
-        <ellipse cx="64" cy="132" rx="10" ry="23" transform="rotate(45 64 132)"/>
-        <ellipse cx="71" cy="210" rx="10" ry="23" transform="rotate(-47 71 210)"/>
-        <ellipse cx="94" cy="267" rx="10" ry="23" transform="rotate(41 94 267)"/>
-        <ellipse cx="88" cy="350" rx="10" ry="23" transform="rotate(-39 88 350)"/>
-      </g>
-      <g fill="#fff">
-        <circle cx="32" cy="52" r="9"/><circle cx="48" cy="105" r="8"/><circle cx="72" cy="165" r="9"/><circle cx="82" cy="242" r="8"/><circle cx="96" cy="316" r="9"/>
-      </g>
-      <g fill="#d7c2e1">
-        <circle cx="51" cy="155" r="8"/><circle cx="77" cy="300" r="7"/>
-      </g>
-    </symbol>
-  </defs>
-</svg>
-
 <main class="page">
-  <svg class="floral-corner tl" viewBox="0 0 300 520"><use href="#floralCluster"/></svg>
-  <svg class="floral-corner tr" viewBox="0 0 300 520"><use href="#floralCluster"/></svg>
-  <svg class="floral-corner bl" viewBox="0 0 300 520"><use href="#floralCluster"/></svg>
-  <svg class="floral-corner br" viewBox="0 0 300 520"><use href="#floralCluster"/></svg>
-  <svg class="floral-spray" viewBox="0 0 130 420"><use href="#spray"/></svg>
+  <div class="floral-corner tl" aria-hidden="true"></div>
+  <div class="floral-corner tr" aria-hidden="true"></div>
+  <div class="floral-corner bl" aria-hidden="true"></div>
+  <div class="floral-corner br" aria-hidden="true"></div>
+  
 
   <section class="section hero">
     <div class="hero-inner reveal">
