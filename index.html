@@ -60,14 +60,7 @@ if(isEnglish){
   const sw=document.getElementById('langSwitch');if(sw){sw.textContent='العربية';sw.href='/';sw.setAttribute('aria-label','عرض الدعوة بالعربية');}
 }
 const target=new Date('2026-10-30T19:00:00+04:00').getTime();function tick(){const d=Math.max(0,target-Date.now());const vals=[Math.floor(d/86400000),Math.floor(d/3600000)%24,Math.floor(d/60000)%60,Math.floor(d/1000)%60];['days','hours','minutes','seconds'].forEach((id,i)=>{const el=document.getElementById(id);if(el)el.textContent=String(vals[i]).padStart(2,'0');});}tick();setInterval(tick,1000);const io=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('show');io.unobserve(entry.target);}});},{threshold:0.12});document.querySelectorAll('.reveal').forEach(el=>io.observe(el));document.getElementById('calendarBtn').addEventListener('click',()=>{const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Tarek & Raneem Wedding//AR','CALSCALE:GREGORIAN','BEGIN:VEVENT','UID:tarek-raneem-20261030@wedding','DTSTAMP:20261007T120000Z','DTSTART;TZID=Asia/Dubai:20261030T190000','DTEND;TZID=Asia/Dubai:20261030T230000','SUMMARY:حفل زفاف طارق ورنيم','LOCATION:مطعم جزيل – واحة دبي للسيليكون','DESCRIPTION:يسعدنا حضوركم ومشاركتكم فرحتنا.','END:VEVENT','END:VCALENDAR'].join('\r\n');const blob=new Blob([ics],{type:'text/calendar;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='tarek-raneem-wedding.ics';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);});
-</script><script>
-(function(){
-  const visitKey='trWeddingVisitCountedV2';
-  if(localStorage.getItem(visitKey)) return;
-  const url='https://counterapi.com/api/tarek-raneem.com/visit/wedding-2026-v2?startNumber=90&_='+Date.now();
-  fetch(url,{cache:'no-store',mode:'cors'})
-    .then(r=>{if(!r.ok) throw new Error('counter '+r.status); return r.json();})
-    .then(()=>localStorage.setItem(visitKey,'1'))
-    .catch(()=>{});
-})();
-</script></body></html>
+</script>
+<script src="https://counterapi.com/c.js?ns=tarek-raneem.com" async></script>
+<div class="counterapi" ns="tarek-raneem.com" action="view" key="wedding-2026-v3" startNumber="90" unique="true" invisible="true" style="display:none!important"></div>
+</body></html>
