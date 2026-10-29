@@ -7,15 +7,17 @@
 <title>إحصائيات دعوة طارق ورنيم</title>
 <style>
 *{box-sizing:border-box}
-html,body{margin:0;width:100%;min-height:100%;background:#f6f1e8}
+html,body{margin:0;width:100%;min-height:100%}
 body{
-  min-height:100dvh;
+  min-height:100svh;
+  background:#f6f1e8;
+  color:#222722;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
   display:flex;
   align-items:center;
   justify-content:center;
   padding:20px;
-  color:#222722;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  overflow-x:hidden
 }
 .card{
   width:100%;
@@ -26,28 +28,37 @@ body{
   border-radius:24px;
   padding:28px 22px;
   box-shadow:0 18px 60px rgba(88,70,40,.10);
-  text-align:center;
+  text-align:center
 }
-h1{font-size:26px;margin:0 0 24px;color:#8b6725}
-.big{font-size:58px;font-weight:700;color:#6a4f1f;line-height:1}
+h1{font-size:25px;margin:0 0 24px;color:#8b6725}
+.big{font-size:58px;line-height:1;font-weight:700;color:#6a4f1f;min-height:58px}
 .label{color:#6b6a64;margin-top:7px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
-.box{padding:18px 10px;border-top:1px solid rgba(172,131,53,.28)}
+.box{padding:18px 8px;border-top:1px solid rgba(172,131,53,.28)}
 .num{font-size:30px;font-weight:700}
 .note{font-size:13px;color:#777;margin-top:22px;line-height:1.7}
-.err{color:#8a2c2c;min-height:18px}
-@media(max-width:430px){
+.err{color:#8a2c2c;min-height:20px}
+.refresh{
+  margin-top:18px;
+  border:1px solid #ac8335;
+  background:transparent;
+  color:#6a4f1f;
+  border-radius:999px;
+  padding:9px 18px;
+  font:inherit;
+  cursor:pointer
+}
+@media(max-width:420px){
   body{padding:14px}
   .card{padding:24px 16px;border-radius:20px}
-  h1{font-size:23px}
-  .big{font-size:52px}
-  .grid{gap:8px}
-  .num{font-size:27px}
+  h1{font-size:22px}
+  .big{font-size:50px}
+  .num{font-size:26px}
 }
 </style>
 </head>
 <body>
-<div class="card">
+<main class="card">
   <h1>إحصائيات دعوة طارق ورنيم</h1>
   <div class="big" id="total">—</div>
   <div class="label">إجمالي تقديري حتى الآن</div>
@@ -59,29 +70,44 @@ h1{font-size:26px;margin:0 0 24px;color:#8b6725}
     </div>
     <div class="box">
       <div class="num" id="tracked">—</div>
-      <div class="label">منذ إصلاح العداد</div>
+      <div class="label">زيارات مسجلة بعد العداد</div>
     </div>
   </div>
 
-  <div class="note">
-    الرقم 90 تقديري للزيارات السابقة. من الآن يُحتسب الزائر الجديد بشكل مجهول مع تقليل التكرار قدر الإمكان.
-  </div>
+  <button class="refresh" type="button" onclick="loadStats()">تحديث الرقم</button>
+  <div class="note">الـ90 رقم تقديري للزيارات السابقة. من الآن فصاعدًا يحاول الموقع احتساب كل متصفح/جهاز مرة واحدة قدر الإمكان.</div>
   <div class="note err" id="err"></div>
-</div>
+</main>
 
 <script>
-function weddingCounterLoaded(data){
-  const total = Number(data && data.value);
-  if(Number.isFinite(total)){
-    document.getElementById('total').textContent = total.toLocaleString('en-US');
-    document.getElementById('tracked').textContent = Math.max(0,total-90).toLocaleString('en-US');
-    document.getElementById('err').textContent = '';
-  }else{
-    document.getElementById('err').textContent = 'تعذر قراءة العداد الآن.';
-  }
+function loadStats(){
+  const totalEl=document.getElementById('total');
+  const trackedEl=document.getElementById('tracked');
+  const err=document.getElementById('err');
+  err.textContent='';
+
+  const cb='trWeddingStatsCb_'+Date.now();
+  window[cb]=function(res){
+    const total=Number(res && res.value);
+    if(Number.isFinite(total)){
+      totalEl.textContent=total.toLocaleString('en-US');
+      trackedEl.textContent=Math.max(0,total-90).toLocaleString('en-US');
+    }else{
+      err.textContent='تعذر قراءة الرقم الآن.';
+    }
+    try{delete window[cb]}catch(e){}
+  };
+
+  const s=document.createElement('script');
+  s.async=true;
+  s.src='https://counterapi.com/api/tarek-raneem.com/view/wedding-2026-v3?readOnly=true&startNumber=90&callback='+encodeURIComponent(cb)+'&_='+Date.now();
+  s.onerror=function(){
+    err.textContent='تعذر تحميل الإحصائيات الآن. حاول مرة ثانية.';
+    try{delete window[cb]}catch(e){}
+  };
+  document.head.appendChild(s);
 }
+loadStats();
 </script>
-<script async src="https://counterapi.com/api/tarek-raneem.com/view/wedding-2026-v3?readOnly=true&startNumber=90&unique=true&callback=weddingCounterLoaded"></script>
-<noscript>فعّل JavaScript لعرض الإحصائيات.</noscript>
 </body>
 </html>
