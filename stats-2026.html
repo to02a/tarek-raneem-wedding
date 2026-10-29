@@ -20,14 +20,14 @@ h1{font-size:26px;margin:0 0 24px;color:#8b6725}.big{font-size:58px;font-weight:
 <div class="box"><div class="num">≈ 90</div><div class="label">قبل بدء التتبع</div></div>
 <div class="box"><div class="num" id="tracked">—</div><div class="label">منذ تركيب العداد</div></div>
 </div>
-<div class="note">الرقم 90 تقديري اعتمادًا على حركة الموقع قبل تركيب العداد. الرقم 90 تقديري للزيارات السابقة. من تاريخ إصلاح العداد، يُحتسب كل متصفح/جهاز مرة واحدة قدر الإمكان، لذلك الرقم ليس سجلًا شخصيًا للأفراد.</div>
+<div class="note">الرقم 90 تقديري للزيارات السابقة. من تاريخ إصلاح العداد، يُحتسب كل متصفح/جهاز مرة واحدة قدر الإمكان، لذلك الرقم ليس سجلًا شخصيًا للأفراد.</div>
 <div class="note err" id="err"></div>
 </div>
 <script>
 (async()=>{
  const totalEl=document.getElementById('total'), trackedEl=document.getElementById('tracked'), err=document.getElementById('err');
  try{
-   const u='https://counterapi.com/api/tarek-raneem.com/visit/wedding-2026-v2?readOnly=true&startNumber=90&_='+Date.now()+'';
+   const u='https://counterapi.com/api/tarek-raneem.com/visit/wedding-2026-v2?readOnly=true&startNumber=90&_='+Date.now();
    const r=await fetch(u,{cache:'no-store'});
    if(!r.ok) throw new Error('HTTP '+r.status);
    const j=await r.json();
