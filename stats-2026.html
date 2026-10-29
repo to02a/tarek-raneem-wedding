@@ -70,7 +70,7 @@ h1{font-size:25px;margin:0 0 28px;color:#8b6725}
 <main class="card">
   <h1>إحصائيات دعوة طارق ورنيم</h1>
   <div class="big" id="total">…</div>
-  <div class="total-label">إجمالي الزيارات التقريبي حتى الآن</div>
+  <div class="total-label">إجمالي الزيارات حتى الآن</div>
 
   <button class="refresh" type="button" onclick="loadStats()">تحديث الرقم</button>
   <div class="note err" id="err"></div>
@@ -79,10 +79,8 @@ h1{font-size:25px;margin:0 0 28px;color:#8b6725}
 <script>
 async function loadStats(){
   const totalEl=document.getElementById('total');
-  const trackedEl=document.getElementById('tracked');
   const err=document.getElementById('err');
   totalEl.textContent='…';
-  trackedEl.textContent='…';
   err.textContent='';
   try{
     const r=await fetch('https://abacus.jasoncameron.dev/get/tarek-raneem-2026/wedding-home?ts='+Date.now(),{
@@ -94,11 +92,9 @@ async function loadStats(){
     const j=await r.json();
     const tracked=Number(j.value||0);
     if(!Number.isFinite(tracked)) throw new Error('Bad value');
-    trackedEl.textContent=tracked.toLocaleString('en-US');
     totalEl.textContent=(90+tracked).toLocaleString('en-US');
   }catch(e){
     totalEl.textContent='90+';
-    trackedEl.textContent='—';
     err.textContent='تعذر قراءة العداد الآن. الموقع نفسه شغال بشكل طبيعي.';
   }
 }
